@@ -16,10 +16,21 @@ function App(){
   const [selectedGenre, setSelectedGenre]=useState(""); //selectedgenre, tiene traccia del genere selezionato dall'utente nel <select>
   const [filteredMovies, setFilterMovies]=useState(initialMovies);
 
+  useEffect(() => {
+
+    if (selectedGenre===''){
+      setFilterMovies(movies);
+    }else{
+      const filtered=movies.filter(movie=>movie.genre===selectedGenre);
+      setFilterMovies(filtered);
+    }
+  
+  }, [selectedGenre, movies])
+
   
   return(
     <>
-    <h1>ciao</h1>
+   
     </>
     
   );
