@@ -12,9 +12,13 @@ const initialMovies = [
 function App(){
 
   //stato di react
-  const [movies]=useState(initialMovies);  //contiene tutti i film e non cambia, lo uso per i filtri
+  const [movies, setMovies]=useState(initialMovies);  //contiene tutti i film e non cambia, lo uso per i filtri
   const [selectedGenre, setSelectedGenre]=useState(""); //selectedgenre, tiene traccia del genere selezionato dall'utente nel <select>
   const [filteredMovies, setFilterMovies]=useState(initialMovies);
+
+   // Stati per i nuovi film
+   const [newTitle, setNewTitle] = useState('');
+   const [newGenre, setNewGenre] = useState('');
 
   useEffect(() => {
 
@@ -27,12 +31,56 @@ function App(){
   
   }, [selectedGenre, movies])
 
+  // Aggiunta di un nuovo film
+  const handleAddMovie = (e) => {
+    e.preventDefault();
+
+    // Verifica che entrambi i campi siano compilati
+    if (newTitle.trim() === '' || newGenre.trim() === '') return;
+
+    // Crea nuovo film e aggiorna lo stato
+    const newMovie = { title: newTitle.trim(), genre: newGenre.trim() };
+    setMovies([...movies, newMovie]);
+
+    // Reset dei campi input
+    setNewTitle('');
+    setNewGenre('');
+  }; 
+
   //interfaccia che vede l'utente
   return(
     <>
 
     <div className='container mt-5'>  {/**container: classe Bootstrap che aggiunge margini e centra il contenuto ||||  mt-5: margine superiore (margin-top) per distanziare dall’alto */}
       <h1 className='mb-5'>React Movie Filter</h1>  {/**mb-4: margine sotto il titolo (margin-bottom */}
+            {/* FORM PER AGGIUNGERE NUOVI FILM */}
+            <div className="card mb-4">
+        <div className="card-body">
+          <h5 className="card-title">Aggiungi un nuovo film</h5>
+          <form onSubmit={handleAddMovie}>
+            <div className="mb-3">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Titolo"
+                value={newTitle}
+                onChange={(e) => setNewTitle(e.target.value)}
+              />
+            </div>
+            <div className="mb-3">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Genere"
+                value={newGenre}
+                onChange={(e) => setNewGenre(e.target.value)}
+              />
+            </div>
+            <button type="submit" className="btn btn-primary">Aggiungi</button>
+          </form>
+        </div>
+      </div>
+
 
       {/** selezione tramoite filtro */}
 
@@ -46,7 +94,6 @@ function App(){
       value={selectedGenre}                              
       onChange={(e) => setSelectedGenre(e.target.value)}  //onChange: quando l’utente seleziona un’opzione, aggiorniamo selectedGenre
 
-
       
     >  
           {/**option film che possono scegliere */}
@@ -58,8 +105,6 @@ function App(){
     
     
     </select>
-
-
 
     </div>
 
@@ -77,7 +122,7 @@ function App(){
             </div>
           </div>
         </div>
-      ))};
+      ))}  {/** <<-- tolto il punto e virgola finale che era un errore */}
     </div>
    
     </>
@@ -86,6 +131,10 @@ function App(){
 }
 
 export default App;
+
+
+
+{/** */}
 
 // ----------------------------------------
 // LOGICA DELL'APPLICAZIONE
@@ -97,3 +146,4 @@ export default App;
 // 4. useEffect filtra i film in base al genere selezionato
 // 5. filteredMovies viene aggiornato con i risultati filtrati
 // 6. React ricarica la UI mostrando solo i film filtrati
+
