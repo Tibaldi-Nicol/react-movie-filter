@@ -62,6 +62,23 @@ function App(){
 
 
     </div>
+
+    <div className='row'>
+      {/**.map(...): itera sui film filtrati e crea una "card" per ognuno */}
+        {/**row e col-md-4: classi Bootstrap per creare una griglia a 3 colonne          */}
+      {filteredMovies.map((movie, index)=>(   
+              
+        <div className='col-md-4 mb-3' key={index}>  {/** key={index}: React richiede una chiave unica per ogni elemento generato dinamicamente*/}
+          <div className='card h-100'>
+            <div className='card-body'>               {/**card, card-body: classi Bootstrap per creare un box visivo pulito */}
+              <h5 className='card-title'>{movie.genre}</h5>
+                <p className='card-text'><strong>Genere:</strong>{movie.genre}</p>
+              
+            </div>
+          </div>
+        </div>
+      ))};
+    </div>
    
     </>
     
