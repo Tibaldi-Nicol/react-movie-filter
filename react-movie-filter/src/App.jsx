@@ -69,10 +69,10 @@ function App(){
       {filteredMovies.map((movie, index)=>(   
               
         <div className='col-md-4 mb-3' key={index}>  {/** key={index}: React richiede una chiave unica per ogni elemento generato dinamicamente*/}
-          <div className='card h-100'>
+          <div className='card h-100 mt-5'>
             <div className='card-body'>               {/**card, card-body: classi Bootstrap per creare un box visivo pulito */}
               <h5 className='card-title'>{movie.genre}</h5>
-                <p className='card-text'><strong>Genere:</strong>{movie.genre}</p>
+                <p className='card-text'><strong>Genere:</strong>{movie.title}</p>
               
             </div>
           </div>
@@ -86,3 +86,14 @@ function App(){
 }
 
 export default App;
+
+// ----------------------------------------
+// LOGICA DELL'APPLICAZIONE
+// ----------------------------------------
+
+// 1. All'inizio tutti i film sono mostrati
+// 2. L’utente sceglie un genere nella tendina
+// 3. Il valore di selectedGenre cambia → React esegue useEffect
+// 4. useEffect filtra i film in base al genere selezionato
+// 5. filteredMovies viene aggiornato con i risultati filtrati
+// 6. React ricarica la UI mostrando solo i film filtrati
