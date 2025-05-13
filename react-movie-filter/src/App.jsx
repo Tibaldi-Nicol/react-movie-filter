@@ -48,7 +48,16 @@ function App(){
 
 
       
-    >  </select>
+    >  
+          {/**option film che possono scegliere */}
+          <option value="">Tutti i generi</option>
+          <option value="Fantascienza">Fantascienza</option>
+          <option value="Thriller">Thriller</option>
+          <option value="Romantico">Romantico</option>
+          <option value="Azione">Azione</option>
+    
+    
+    </select>
 
 
 
