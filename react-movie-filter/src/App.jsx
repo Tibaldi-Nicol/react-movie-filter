@@ -27,9 +27,32 @@ function App(){
   
   }, [selectedGenre, movies])
 
-  
+  //interfaccia che vede l'utente
   return(
     <>
+
+    <div className='container mt-5'>  {/**container: classe Bootstrap che aggiunge margini e centra il contenuto ||||  mt-5: margine superiore (margin-top) per distanziare dall’alto */}
+      <h1 className='mb-5'>React Movie Filter</h1>  {/**mb-4: margine sotto il titolo (margin-bottom */}
+
+      {/** selezione tramoite filtro */}
+
+      <label htmlFor="genre" className="form-label">Filtra per genere:</label>{/**form-label, form-select: classi Bootstrap per stilizzare form */}
+
+      <select
+
+      id="genre"
+      className="form-select"
+      //     {/**value={selectedGenre}: collega lo stato al valore corrente del select */}
+      value={selectedGenre}                              
+      onChange={(e) => setSelectedGenre(e.target.value)}  //onChange: quando l’utente seleziona un’opzione, aggiorniamo selectedGenre
+
+
+      
+    >  </select>
+
+
+
+    </div>
    
     </>
     
